@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -54,9 +55,13 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        dbNhaHang.xoaNhaHang(dsNhaHang.get(position).getMaNhaHang());
-                        dsNhaHang.remove(position);
-                        nhaHangAdapter.notifyDataSetChanged();
+                        if (dbNhaHang.xoaNhaHang(dsNhaHang.get(position).getMaNhaHang())) {
+                            dsNhaHang.remove(position);
+                            nhaHangAdapter.notifyDataSetChanged();
+                            Toast.makeText(MainActivity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(MainActivity.this, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                        }
 
                         dialog.dismiss();
                     }
@@ -79,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
     private void clickThem() {
         Intent intent = new Intent(this, ThemActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private void anhXa() {

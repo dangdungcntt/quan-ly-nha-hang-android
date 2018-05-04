@@ -59,7 +59,7 @@ public class DBNhaHang extends SQLiteOpenHelper {
     }
 
     public boolean xoaNhaHang(String maNH) {
-        String sql =  "delete from " + tableName + " where " + col_maNH + " = " + maNH + ";";
+        String sql =  "delete from " + tableName + " where " + col_maNH + " = '" + maNH + "';";
         SQLiteDatabase db = this.getWritableDatabase();
         try {
 
